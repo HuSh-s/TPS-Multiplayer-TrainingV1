@@ -14,11 +14,11 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
-        [Header("Player")]
-        [Tooltip("Move speed of the character in m/s")]
-        public float MoveSpeed = 2.0f;
+        [SerializeField] private bool armed = false;
 
-        [Tooltip("Sprint speed of the character in m/s")]
+        [Header("Player")]
+        public float WalkSpeed = 2.0f;
+        public float RunSpeed = 4f;
         public float SprintSpeed = 5.335f;
 
         [Tooltip("How fast the character turns to face movement direction")]
@@ -109,7 +109,9 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
-
+        private float targetSpeed = 2;
+        private bool _walking = false;
+        private float _speedAnimationMultiplier = 0;
         private bool IsCurrentDeviceMouse
         {
             get
@@ -158,7 +160,31 @@ namespace StarterAssets
 
             JumpAndGravity();
             GroundedCheck();
-            Move();
+
+            _animator.SetFloat("Armed", armed ? 1f : 0f);
+
+            if (_input.walk)
+            {
+                _input.walk = false;
+                _walking = !_walking;
+            }
+
+            targetSpeed = RunSpeed;
+            if (_input.sprint)
+            {
+                targetSpeed = SprintSpeed;
+                _speedAnimationMultiplier = 3;
+            }
+            else if (_walking)
+            {
+                targetSpeed = WalkSpeed;
+                _speedAnimationMultiplier = 1;
+            }
+            else
+            {
+                _speedAnimationMultiplier = 2;
+            }
+                Move();
         }
 
         private void LateUpdate()
@@ -213,9 +239,6 @@ namespace StarterAssets
 
         private void Move()
         {
-            // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
-
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
@@ -245,7 +268,7 @@ namespace StarterAssets
                 _speed = targetSpeed;
             }
 
-            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+            _animationBlend = Mathf.Lerp(_animationBlend, _input.move == Vector2.zero ? 0 : _speedAnimationMultiplier, Time.deltaTime * SpeedChangeRate);
             if (_animationBlend < 0.01f) _animationBlend = 0f;
 
             // normalise input direction
