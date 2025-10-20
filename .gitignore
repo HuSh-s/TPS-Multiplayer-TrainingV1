@@ -18,19 +18,19 @@ Thumbs.db
 *.svd
 
 # Unity generated folders
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Uu]ser[Ss]ettings/
-/[Pp]ackage[Cc]ache/
-/[Bb]uild[Rr]eport/
-/[Mm]emoryCaptures/
-/[Rr]ecordings/
-/[Oo]bj/
-/[Oo]utput/
+TPS-Multiplayer-TrainingV1/[Ll]ibrary/
+TPS-Multiplayer-TrainingV1/[Tt]emp/
+TPS-Multiplayer-TrainingV1/[Oo]bj/
+TPS-Multiplayer-TrainingV1/[Bb]uild/
+TPS-Multiplayer-TrainingV1/[Bb]uilds/
+TPS-Multiplayer-TrainingV1/[Ll]ogs/
+TPS-Multiplayer-TrainingV1/[Uu]ser[Ss]ettings/
+TPS-Multiplayer-TrainingV1/[Pp]ackage[Cc]ache/
+TPS-Multiplayer-TrainingV1/[Bb]uild[Rr]eport/
+TPS-Multiplayer-TrainingV1/[Mm]emoryCaptures/
+TPS-Multiplayer-TrainingV1/[Rr]ecordings/
+TPS-Multiplayer-TrainingV1/[Oo]bj/
+TPS-Multiplayer-TrainingV1/[Oo]utput/
 
 # Cache directories
 .gradle/
